@@ -39,13 +39,13 @@
 
   <script>
     const PROJECT_ID = "run-or-die-36e71";
-    const URL = `https://firestore.googleapis.com/v1/projects/${PROJECT_ID}/databases/(default)/documents/scores?pageSize=20`;
+    const URL = `https://firestore.googleapis.com/v1/projects/${PROJECT_ID}/databases/(default)/documents/scores?pageSize=20&orderBy=score%20desc`;
 
     function parseScore(doc) {
       const f = doc.fields || {};
       return {
         name: f.nom?.stringValue || "Joueur",
-        score: parseInt(f.score?.integerValue || 0)
+        score: parseInt(f.score?.integerValue || f.score?.doubleValue || 0)
       };
     }
 
